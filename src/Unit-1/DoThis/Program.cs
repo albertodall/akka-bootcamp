@@ -3,6 +3,7 @@
 namespace WinTail
 {
     #region Program
+
     class Program
     {
         public static ActorSystem MyActorSystem;
@@ -12,14 +13,29 @@ namespace WinTail
             // initialize MyActorSystem
             MyActorSystem = ActorSystem.Create("MyActorSystem");
 
-            // nothing here where our actors used to be!
+            // create top-level actors within the actor system
+            Props tailCoordonatorActorProps = 
+                Props.Create(() => new TailCoordinatorActor());
+            IActorRef tailCoordinatorActor = 
+                MyActorSystem.ActorOf(
+                    tailCoordonatorActorProps, "tailCoordinatorActor");
 
-            Props consoleWriterProps = Props.Create<ConsoleWriterActor>();
-            IActorRef consoleWriterActor = MyActorSystem.ActorOf(consoleWriterProps, "consoleWriterActor");
-            Props validationActorProps = Props.Create(() => new ValidationActor(consoleWriterActor));
-            IActorRef validationActor = MyActorSystem.ActorOf(validationActorProps, "validationActor");
-            Props consoleReaderProps = Props.Create<ConsoleReaderActor>(validationActor);
-            IActorRef consoleReaderActor = MyActorSystem.ActorOf(consoleReaderProps, "consoleReaderActor");
+            Props consoleWriterProps = 
+                Props.Create<ConsoleWriterActor>();
+            IActorRef consoleWriterActor = 
+                MyActorSystem.ActorOf(
+                    consoleWriterProps, "consoleWriterActor");
+
+            Props fileValidatorActorProps = 
+                Props.Create(() => 
+                    new FileValidatorActor(consoleWriterActor, tailCoordinatorActor));
+            IActorRef validationActor =
+                MyActorSystem.ActorOf(fileValidatorActorProps, "validationActor");
+
+            Props consoleReaderProps = 
+                Props.Create<ConsoleReaderActor>(validationActor);
+            IActorRef consoleReaderActor = 
+                MyActorSystem.ActorOf(consoleReaderProps, "consoleReaderActor");
 
             // tell console reader to begin
             consoleReaderActor.Tell(ConsoleReaderActor.StartCommand);
@@ -28,5 +44,6 @@ namespace WinTail
             MyActorSystem.WhenTerminated.Wait();
         }
     }
+
     #endregion
 }
