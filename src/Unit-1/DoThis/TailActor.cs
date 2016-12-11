@@ -1,5 +1,4 @@
-﻿using System;
-using Akka.Actor;
+﻿using Akka.Actor;
 using System.IO;
 using System.Text;
 
@@ -57,27 +56,39 @@ namespace WinTail
 
         private readonly string _filePath;
         private readonly IActorRef _reporterActor;
-        private readonly FileObserver _observer;
-        private readonly Stream _fileStream;
-        private readonly StreamReader _fileStreamReader;
+        private FileObserver _observer;
+        private Stream _fileStream;
+        private StreamReader _fileStreamReader;
 
         public TailActor(IActorRef reporterActor, string filePath)
         {
             _reporterActor = reporterActor;
             _filePath = filePath;
+        }
 
+        protected override void PreStart()
+        {
             // start watching file for changes
             _observer = new FileObserver(Self, Path.GetFullPath(_filePath));
             _observer.Start();
 
             // open the file stream with shared read/write permissions
             // (so file can be written to while open)
-            _fileStream = new FileStream(Path.GetFullPath(_filePath), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            _fileStream = new FileStream(
+                Path.GetFullPath(_filePath), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             _fileStreamReader = new StreamReader(_fileStream, Encoding.UTF8);
 
             // read the initial contents of the file and send it to console as first msg
             var text = _fileStreamReader.ReadToEnd();
             Self.Tell(new InitialRead(_filePath, text));
+        }
+
+        protected override void PostStop()
+        {
+            _observer?.Dispose();
+            _fileStreamReader?.Dispose();
+            _fileStream?.Dispose();
+            base.PostStop();
         }
 
         protected override void OnReceive(object message)
