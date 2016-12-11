@@ -20,7 +20,6 @@ namespace ChartApp
 
         #region Initialization
 
-
         private void Main_Load(object sender, EventArgs e)
         {
             _chartActor = Program.ChartActors.ActorOf(Props.Create(() => new ChartingActor(sysChart)), "charting");
