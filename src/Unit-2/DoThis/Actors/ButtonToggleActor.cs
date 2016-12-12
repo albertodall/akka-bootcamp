@@ -19,7 +19,7 @@ namespace ChartApp.Actors
 
         #endregion
 
-        private readonly CounterType _myCounterType;
+        private readonly ChartingMessages.CounterType _myCounterType;
         private bool _isToggledOn;
         private readonly Button _myButton;
         private readonly IActorRef _coordinatorActor;
