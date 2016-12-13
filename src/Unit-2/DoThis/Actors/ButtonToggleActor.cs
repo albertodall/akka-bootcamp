@@ -1,6 +1,5 @@
 ﻿using Akka.Actor;
 using System.Windows.Forms;
-using static ChartApp.Actors.ChartingMessages;
 
 namespace ChartApp.Actors
 {
@@ -19,7 +18,7 @@ namespace ChartApp.Actors
 
         #endregion
 
-        private readonly ChartingMessages.CounterType _myCounterType;
+        private readonly CounterType _myCounterType;
         private bool _isToggledOn;
         private readonly Button _myButton;
         private readonly IActorRef _coordinatorActor;

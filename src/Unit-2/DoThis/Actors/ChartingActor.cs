@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms.DataVisualization.Charting;
 using Akka.Actor;
-using static ChartApp.Actors.ChartingMessages;
 
 namespace ChartApp.Actors
 {
@@ -158,6 +157,7 @@ namespace ChartApp.Actors
                 _seriesIndex.ContainsKey(metric.Series))
             {
                 var series = _seriesIndex[metric.Series];
+                if (series.Points == null) return; // means we're shutting down
                 series.Points.AddXY(xPosCounter++, metric.CounterValue);
                 while (series.Points.Count > MaxPoints) series.Points.RemoveAt(0);
                 SetChartBoundaries();
