@@ -1,10 +1,8 @@
 # Akka.NET Bootcamp
 
-![Akka.NET logo](images/akka_net_logo.png)
-
 Welcome to [Akka.NET](http://getakka.net/ "Akka.NET - Distributed actor model in C# and F#") Bootcamp! This is a free, self-directed learning course brought to you by the folks at [Petabridge](http://petabridge.com/ "Petabridge - Akka.NET Training, Consulting, and Support").
 
-[![Get Akka.NET training material & updates at https://petabridge.com/bootcamp/signup](https://s3.amazonaws.com/petabridge/public/github_button_grok.png)](https://petabridge.com/bootcamp/signup)
+[![Get Akka.NET training material & updates at https://petabridge.com/bootcamp/signup](images/grok.png)](https://petabridge.com/bootcamp/signup)
 
 [![Join the chat at https://gitter.im/petabridge/akka-bootcamp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/petabridge/akka-bootcamp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -42,8 +40,8 @@ In Unit 2, we're going to get into some more of the intermediate Akka.NET featur
 
 In Unit 2 you will learn:
 
-1. How to use [HOCON configuration](http://getakka.net/docs/concepts/hocon "Akka.NET HOCON Configurations") to configure your actors via App.config and Web.config;
-1. How to configure your actor's [Dispatcher](http://getakka.net/docs/working-with-actors/Dispatchers) to run on the Windows Forms UI thread, so actors can make operations directly on UI elements without needing to change contexts;
+1. How to use [HOCON configuration](http://getakka.net/articles/concepts/configuration.html#what-is-hocon "Akka.NET HOCON Configurations") to configure your actors via App.config and Web.config;
+1. How to configure your actor's [Dispatcher](https://getakka.net/articles/actors/dispatchers.html) to run on the Windows Forms UI thread, so actors can make operations directly on UI elements without needing to change contexts;
 1. How to handle more sophisticated types of pattern matching using `ReceiveActor`;
 1. How to use the `Scheduler` to send recurring messages to actors;
 1. How to use the [Publish-subscribe (pub-sub) pattern](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) between actors;
@@ -115,7 +113,7 @@ A few things to bear in mind when you're following the step-by-step instructions
 
 1. **Don't just copy and paste the code shown in the lesson's README**. You'll retain and learn all of the built-in Akka.NET functions if you type out the code as it's shown. 
 2. **You might be required to fill in some blanks during individual lessons.** Part of helping you learn Akka.NET involves leaving some parts of the exercise up to you - if you ever feel lost, always check the contents of the `/Completed` folder for that lesson.
-3. **Don't be afraid to ask questions**. You can [reach the Petabridge and Akka.NET teams in our Gitter chat](https://gitter.im/petabridge/akka-bootcamp) here.
+3. **Don't be afraid to ask questions**. You can [reach the Petabridge team and other Akka.NET users in our Gitter chat](https://gitter.im/petabridge/akka-bootcamp) here.
 
 
 ## Docs
@@ -142,4 +140,4 @@ This course expects the following:
 **[Petabridge also offers Akka.NET consulting and training](http://petabridge.com/ "Petabridge Akka.NET consulting and training")** - so please [sign up for our mailing list](http://eepurl.com/bSlGWr)!
 
 ---
-Copyright 2015-2016 Petabridge, LLC
+Copyright 2015-2017 Petabridge, LLC
